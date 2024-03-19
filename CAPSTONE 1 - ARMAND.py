@@ -29,20 +29,6 @@ list_karyawan = [
     
     ]
 
-# headers = ['ID Karyawan', 'Nama', 'Departemen', 'Umur', 'Domisili']
-
-# rows = [[karyawan[field] for field in headers] for karyawan in list_karyawan]
-# print('\n')
-# print('Selamat datang di portal karyawan PT. GUE'.center(56, '-'))
-# print(tabulate(rows, headers=headers, tablefmt='pretty'))
-
-# def tabulate_table():
-#     print('Daftar Nilai Capstone 1\n')
-#     empty_list=[]
-#     for i in range(len(list_karyawan)):
-#         empty_list.append([i+1,list_karyawan[i]['ID Karyawan'], list_karyawan[i]['Nama'], list_karyawan[i]['Departemen'],list_karyawan[i]['Umur'],list_karyawan[i]['Domisili']])
-#     print(tabulate(empty_list,tablefmt='pretty',headers=['ID Karyawan','Nama','Departemen','Umur','Domisili']))
-
 def isDigit(angka):
     return angka.isdigit()
 
@@ -58,14 +44,14 @@ def inputAngka(teks):
 
 def main_menu() :
     input_menu = input('''---------------------------------------------
-Selamat datang di portal karyawan PT. GUE
+SELAMAT DATANG DI PORTAL KARYAWAN PT.JCDS
           
 Menu :
-1. Read Data Karyawan
-2. Create Data Karyawan
-3. Update Data Karyawan
-4. Delete Data Karyawan    
-5. Exit
+1. Menampilkan Data Karyawan
+2. Menambah Data Karyawan
+3. Merubah Data Karyawan
+4. Menghapus Data Karyawan    
+5. Keluar Aplikasi
 
 Masukkan menu yang ingin dijalankan: ''')
 
@@ -75,7 +61,7 @@ Masukkan menu yang ingin dijalankan: ''')
 def readData() :
     while True :
         menu1 = input('''----------------------
-Data karyawan
+Data Karyawan
 
 Menu:
 1. Tampilkan seluruh karyawan
@@ -86,7 +72,7 @@ Masukkan menu yang ingin dijalankan: ''')
             
         if menu1 == '1' :
             if list_karyawan == [] :
-                print('\nNo Data')
+                print('\nTidak ada data')
             elif list_karyawan != []:
                 headers = ['ID Karyawan', 'Nama', 'Departemen', 'Umur', 'Domisili']
                 rows = [[karyawan[field] for field in headers] for karyawan in list_karyawan]
@@ -94,15 +80,9 @@ Masukkan menu yang ingin dijalankan: ''')
                 print('SELAMAT DATANG DI PORTAL KARYAWAN PT.JCDS'.center(63, '-'))
                 print(tabulate(rows, headers=headers, tablefmt='fancy_grid'))
 
-                # print('\nList Karyawan\n')
-                # print('ID Karyawan\t| Nama   \t| Departement\t| Umur\t| Domisili')
-                # for i in range(len(list_karyawan)) :
-                #     print('{}   \t\t| {}   \t| {}\t| {}\t| {}'.format(list_karyawan[i]['ID Karyawan'], list_karyawan[i]['Nama'], list_karyawan[i]['Departemen'],list_karyawan[i]['Umur'],list_karyawan[i]['Domisili']))
-
-
         if menu1 == '2':
             if not list_karyawan:
-                print('\nNo Data')
+                print('\nTidak ada data')
             else:
                 while True:
                     ID_inp = inputAngka('Masukkan ID karyawan: ')
@@ -122,7 +102,7 @@ Masukkan menu yang ingin dijalankan: ''')
                     for karyawan in list_karyawan:
                         if karyawan['ID Karyawan'] == ID_inp:
                             rows = [[karyawan['ID Karyawan'], karyawan['Nama'], karyawan['Departemen'], karyawan['Umur'], karyawan['Domisili']]]
-                            print(tabulate(rows, headers=headers, tablefmt='pretty'))
+                            print(tabulate(rows, headers=headers, tablefmt='fancy_grid'))
                             break
                 else:
                     print('\nTidak ada data')
@@ -134,7 +114,7 @@ Masukkan menu yang ingin dijalankan: ''')
 def createData() :
     while (True) :
         menu2 = input('''---------------------
-Menambah data karyawan
+Menambah Data Karyawan
 
 Menu:
 1. Menambah karyawan
@@ -144,7 +124,7 @@ Masukkan menu yang ingin dijalankan: ''')
 
         if menu2 == '1':
             while True:
-                add_ID = inputAngka('Masukkan ID karyawan: ')
+                add_ID = inputAngka('Masukkan ID karyawan : ')
                 if add_ID.isdigit():
                     add_ID = int(add_ID)
                     if add_ID >= 1000:
@@ -165,7 +145,7 @@ Masukkan menu yang ingin dijalankan: ''')
                 print('ID karyawan sudah ada')
 
             else :    
-                add_Nama = input('Masukkan nama karyawan: ')
+                add_Nama = input('Masukkan nama karyawan : ')
                 add_Departemen = input(''' 
 Departemen:
 1. Marketing
@@ -173,25 +153,26 @@ Departemen:
 3. Finance
 4. Procurement
 
-Masukkan nama departemen: ''')
+Masukkan Nama Departemen : ''')
                 while True:
-                    add_Umur = inputAngka('Masukkan umur karyawan: ')
+                    add_Umur = inputAngka('Masukkan umur karyawan : ')
                     if 18 <= int(add_Umur) <= 60:
                         break
                     else:
                         print('Mohon masukkan umur antara 18 dan 60')
 
-                add_Domisili = input('Masukkan domisili karyawan : ').capitalize
+                add_Domisili = input('Masukkan domisili karyawan : ')
                 while (True) :
-                    save = input('Apakah anda yakin untuk menyimpan perubahan? (ya/tidak) ')
+                    save = input('Apakah anda yakin untuk menyimpan data? (ya/tidak) ')
 
                     if save.lower() == 'ya':
                         list_karyawan.append({'ID Karyawan': add_ID, 'Nama': add_Nama, 'Departemen': add_Departemen, 'Umur': add_Umur, 'Domisili': add_Domisili})
-                        print('Data berhasil disimpan')
-                        print('\nList Karyawan setelah penambahan:\n')
+                        print('\nData berhasil disimpan\n')
+                        print('\nList Karyawan setelah penambahan :\n')
                         headers = ['ID Karyawan', 'Nama', 'Departemen', 'Umur', 'Domisili']
                         rows = [[karyawan['ID Karyawan'], karyawan['Nama'], karyawan['Departemen'], karyawan['Umur'], karyawan['Domisili']] for karyawan in list_karyawan]
-                        print(tabulate(rows, headers=headers, tablefmt='pretty'))
+                        print(tabulate(rows, headers=headers, tablefmt='fancy_grid'))
+                        break
                     elif save.lower() == 'tidak':
                         print('Batal menyimpan data')
                         break
@@ -205,30 +186,30 @@ Masukkan nama departemen: ''')
 def updateData() :
     while (True):
         menu3 = input('''----------------------
-Merubah data karyawan
+Merubah Data Karyawan
 
 Menu:
 1. Ubah data karyawan
 2. Kembali ke menu utama
 
-Masukkan menu yang ingin dijalankan: ''')
+Masukkan menu yang ingin dijalankan : ''')
+        if menu3 == '1':
+            while True:
+                upd_ID = int(input('Masukkan ID karyawan : '))
+                ID_list = [karyawan['ID Karyawan'] for karyawan in list_karyawan]
 
-        if menu3 == '1' :
-            while (True) : 
-                upd_ID = int(input('Masukkan ID karyawan: '))
-                ID_list = []
-                for i in list_karyawan:
-                    ID_list.append(i['ID Karyawan'])
-                    
-                if upd_ID not in ID_list :
+                if upd_ID not in ID_list:
                     print('ID karyawan tidak ditemukan')
                     break
-                else :
-                    for i in range(len(list_karyawan)) :
-                        if list_karyawan[i]['ID Karyawan'] == upd_ID :
-                            upd_idx = i
-                            print('ID Karyawan\t| Nama   \t| Departemen\t| Umur\t| Domisili')
-                            print('{}   \t\t| {}   \t| {}\t| {}\t| {}'.format(list_karyawan[i]['ID Karyawan'], list_karyawan[i]['Nama'], list_karyawan[i]['Departemen'],list_karyawan[i]['Umur'],list_karyawan[i]['Domisili']))
+                else:
+                    for karyawan in list_karyawan:
+                        if karyawan['ID Karyawan'] == upd_ID:
+                            upd_idx = list_karyawan.index(karyawan)
+                            headers = ['ID Karyawan', 'Nama', 'Departemen', 'Umur', 'Domisili']
+                            data = [list(karyawan.values())]
+                            print(tabulate(data, headers=headers, tablefmt='fancy_grid'))
+                            break
+
                     while (True) :    
                         update1 = input('Apakah anda yakin ingin melakukan perubahan? (ya/tidak) ')
                             
@@ -253,9 +234,9 @@ Masukkan menu yang ingin dijalankan: ''')
                                     field = 'Domisili'
                                     break
                                 
-                            inp_value = input('Silahkan masukkan perubahan: ')
+                            inp_value = input('Silahkan masukkan perubahan : ')
                                     
-                            update2 = input('Apakah anda yakin ingin melakukan perubahan? (ya/tidak) ')
+                            update2 = input('Apakah anda yakin ingin menyimpan perubahan? (ya/tidak)')
                                 
                             if update2.lower() == 'ya' :
                                 list_karyawan[upd_idx][field] = inp_value
@@ -280,7 +261,7 @@ Masukkan menu yang ingin dijalankan: ''')
 def deleteData() :
     while (True) :
         menu4 = input('''--------------------
-Menghapus data karyawan
+Menghapus Data Karyawan
 
 Menu:
 1. Hapus karyawan
@@ -326,7 +307,8 @@ while (True) :
     elif menu == '4' :
         deleteData()            
     elif menu == '5' :
+        print('\nTerima kasih\nSampai jumpa kembali\n')
         break
     else:
-        print('Silahkan masukkan kembali menu dengan benar\n')
+        print('\nSilahkan masukkan kembali menu dengan benar!\n')
 
